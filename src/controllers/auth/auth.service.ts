@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { from, Observable } from 'rxjs';
@@ -10,11 +10,15 @@ import { User } from './user.interface';
 export class AuthService {
 	constructor(private jwtService: JwtService, @InjectRepository(UserEntity) private usersRepository: Repository<UserEntity>) {}
 
-	setRegister(user: User): Observable<UserEntity> {
+	async setRegister(user: User): Promise<UserEntity> {
 		const { username, email, password } = user;
-		const payload = { email: email, password: password, username: username };
+		const existData = await this.usersRepository.findOne({email});
 
-		return from(this.usersRepository.save(user));
+		if(existData.email){
+			throw new HttpException('Forbidden', HttpStatus.BAD_REQUEST);
+		}
+
+		return this.usersRepository.save(user);
 	}
 
 	setLogin(user: User): Object {

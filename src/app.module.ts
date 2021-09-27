@@ -11,9 +11,9 @@ import { AuthModule } from './controllers/auth/auth.module';
       type: 'mysql',
       host: 'localhost',
       port: 3306,
-      username: process.env.MYSQL_USERNAME,
-      password: process.env.MYSQL_PASSWORD,
-      database: process.env.MYSQL_DATABASE,
+      username: 'root',
+      password: '123456',
+      database: 'salon_system',
       autoLoadEntities: true,
       entities: [UserEntity],
       synchronize: true, // shouldn't be used in production - may lose data
