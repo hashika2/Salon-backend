@@ -6,14 +6,14 @@ export class User {
     email: string;
 
     @IsNotEmpty()
-    name?:string
+    username?:string
 
     @IsNotEmpty()
     password:string
 
-    @IsNotEmpty()
-    age?:number
+    // @IsNotEmpty()
+    // age?:number
 
-    @IsNotEmpty()
-    isMale?: boolean
+    // @IsNotEmpty()
+    // isMale?: boolean
 }
