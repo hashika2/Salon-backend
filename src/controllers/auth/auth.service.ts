@@ -15,7 +15,7 @@ export class AuthService {
 		const existData = await this.usersRepository.findOne({email});
 
 		if(existData.email){
-			throw new HttpException('Forbidden', HttpStatus.BAD_REQUEST);
+			throw new HttpException('User is Already exist', HttpStatus.BAD_REQUEST);
 		}
 
 		return this.usersRepository.save(user);
