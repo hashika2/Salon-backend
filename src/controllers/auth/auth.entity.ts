@@ -12,6 +12,9 @@ export class UserEntity {
     email: string
 
     @Column()
+    userId: string
+
+    @Column()
     password: string
 
     @Column({ type: 'timestamp', default:()=> 'CURRENT_TIMESTAMP'})
