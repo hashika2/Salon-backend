@@ -1,27 +1,23 @@
-import { ValidatorOptions } from "@nestjs/common/interfaces/external/validator-options.interface";
-import { IsEmail, IsEmpty, IsNotEmpty } from "class-validator";
+import { ValidatorOptions } from '@nestjs/common/interfaces/external/validator-options.interface';
+import { IsEmail, IsEmpty, IsNotEmpty } from 'class-validator';
 
 export class User {
+	userId: string;
 
-    userId: string;
+	@IsEmail() email: string;
 
-    @IsEmail()
-    email: string;
+	@IsNotEmpty() username?: string;
 
-    @IsNotEmpty()
-    username?:string
+	@IsNotEmpty() password: string;
 
-    @IsNotEmpty()
-    password:string
+	// @IsNotEmpty()
+	// age?:number
 
-    // @IsNotEmpty()
-    // age?:number
-
-    // @IsNotEmpty()
-    // isMale?: boolean
+	// @IsNotEmpty()
+	// isMale?: boolean
 }
 
-export interface EmailPassword{
-    email: string;
-    password: string
+export interface EmailPassword {
+	email: string;
+	password: string;
 }
