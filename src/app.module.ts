@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserEntity } from './controllers/auth/auth.entity';
 import { AuthModule } from './controllers/auth/auth.module';
+import { StoreModule } from './controllers/store/store.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { AuthModule } from './controllers/auth/auth.module';
       entities: [UserEntity],
       synchronize: true, // shouldn't be used in production - may lose data
     }),
-    AuthModule
+    AuthModule,
+    StoreModule
   ],
   controllers: [AppController],
   providers: [AppService],
