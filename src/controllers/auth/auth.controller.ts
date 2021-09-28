@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { User } from './user.interface';
+import { EmailPassword, User } from './user.interface';
 
 @Controller('api/auth')
 export class AuthController {
@@ -14,5 +14,16 @@ export class AuthController {
     @Post('/login')
     login(@Body() user:User):Object{
       return this.authService.setLogin(user);
+    }
+
+    @Post('/forget-password')
+    forgetPassword(@Body() email: string){
+      return this.authService.forgetPassword(email);
+    }
+
+    @Post('/confirm-password')
+    confirmPassword(@Body() user: EmailPassword){
+      console.log(user)
+      return this.authService.confirmPassword(user);
     }
 }

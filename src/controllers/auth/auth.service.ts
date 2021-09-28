@@ -3,9 +3,9 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 const bcrypt = require('bcryptjs');
 import { uuid } from 'uuidv4';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { UserEntity } from './auth.entity';
-import { User } from './user.interface';
+import { EmailPassword, User } from './user.interface';
 
 @Injectable()
 export class AuthService {
@@ -35,5 +35,18 @@ export class AuthService {
 			username: existData.username,
 			userId: existData.userId
 		};
+	}
+
+	forgetPassword(email: string){
+		// send email to the user
+	}
+
+	async confirmPassword( user: EmailPassword):Promise<Object> {
+		const email = user.email;
+		const hashPassword = bcrypt.hashSync(user.password, 10);
+		const existData = await this.usersRepository.findOne({email});
+		console.log(existData)
+		existData.password = hashPassword;
+		return this.usersRepository.save(existData);
 	}
 }

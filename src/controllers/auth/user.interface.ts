@@ -20,3 +20,8 @@ export class User {
     // @IsNotEmpty()
     // isMale?: boolean
 }
+
+export interface EmailPassword{
+    email: string;
+    password: string
+}
