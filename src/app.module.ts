@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserEntity } from './controllers/auth/auth.entity';
 import { AuthModule } from './controllers/auth/auth.module';
+import { BookingModule } from './controllers/booking/booking.module';
 import { StoreModule } from './controllers/store/store.module';
 
 @Module({
@@ -20,7 +21,8 @@ import { StoreModule } from './controllers/store/store.module';
       synchronize: true, // shouldn't be used in production - may lose data
     }),
     AuthModule,
-    StoreModule
+    StoreModule,
+    BookingModule
   ],
   controllers: [AppController],
   providers: [AppService],
