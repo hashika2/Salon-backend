@@ -6,7 +6,7 @@ import { Booking } from './booking.interface';
 
 @Injectable()
 export class BookingService {
-	constructor(@InjectRepository(BookingEntity) private storeRepository: Repository<BookingEntity>) {}
+	constructor(@InjectRepository(BookingEntity) @InjectRepository(BookingEntity) private bookingRepository: Repository<BookingEntity>) {}
 
 	async getAllBookedData(): Promise<Object> {
 		// const res = await this.storeRepository.find();
@@ -30,8 +30,7 @@ export class BookingService {
 		];
 	}
 
-	setBookingDate(booking: Booking) {
-		console.log(booking);
-		return 'success';
+	async setBookingDate(booking: Booking):Promise<BookingEntity> {
+		return await this.bookingRepository.save(booking);
 	}
 }

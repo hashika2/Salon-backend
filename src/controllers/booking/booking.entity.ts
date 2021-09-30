@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 // import { StyleStoreEntity } from "./styleStore.entity";
 
-@Entity('store')
+@Entity('booking')
 export class BookingEntity {
     @PrimaryGeneratedColumn()
     id: number
@@ -11,6 +11,9 @@ export class BookingEntity {
 
     @Column()
     picktime: string
+
+    @Column()
+    userId: number
 
     @Column({ type: 'timestamp', default:()=> 'CURRENT_TIMESTAMP'})
     createdAt: Date;

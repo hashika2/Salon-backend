@@ -8,7 +8,6 @@ export class BookingController {
 
     @Get('/all')
 	allStoreData(): Object {
-		console.log("**********")
 		return this.bookingService.getAllBookedData();
 	}
 
