@@ -1,5 +1,5 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
-import { query } from 'express';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import { Booking } from './booking.interface';
 import { BookingService } from './booking.service';
 
 @Controller('api/booking')
@@ -9,6 +9,11 @@ export class BookingController {
     @Get('/all')
 	allStoreData(): Object {
 		console.log("**********")
-		return this.bookingService.getAllStoreData();
+		return this.bookingService.getAllBookedData();
+	}
+
+    @Post('/')
+	bookingDate(@Body() booking: Booking) {
+		return this.bookingService.setBookingDate(booking);
 	}
 }
