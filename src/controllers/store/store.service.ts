@@ -1,27 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { StoreEntity } from './store.entity';
 
 @Injectable()
 export class StoreService {
-	getAllStoreData(): Object {
+	constructor(@InjectRepository(StoreEntity) private storeRepository: Repository<StoreEntity>){}
+
+	async getAllStoreData(): Promise<Object[]> {
+		// const res = await this.storeRepository.find();
+		// console.log
+		// return res;
 		return [
 			{
-				id: 'store1',
 				name: 'Hashika Maduranga',
 				work: 'Hair cutting, coloring hair styling',
-				price: '10',
+				price: 10,
 				avatar:
 					'https://media.istockphoto.com/photos/barber-using-scissors-and-comb-picture-id640274128?k=20&m=640274128&s=612x612&w=0&h=XuetWJSNoLnN7f1t0CjGqLVi_P7uxdvuLG5iOvs7yjc='
 			},
 			{
-				id: 'store1',
 				name: 'Hashika Maduranga',
 				work: 'Hair cutting, coloring hair styling',
-				price: '10',
+				price: 10,
 				avatar:
 					'https://media.istockphoto.com/photos/barber-using-scissors-and-comb-picture-id640274128?k=20&m=640274128&s=612x612&w=0&h=XuetWJSNoLnN7f1t0CjGqLVi_P7uxdvuLG5iOvs7yjc='
 			},
 			{
-				id: 'store1',
+				sotoreId: 'store1',
 				name: 'Hashika Maduranga',
 				work: 'Hair cutting, coloring hair styling',
 				price: '10',
