@@ -11,10 +11,10 @@ import { StoreModule } from './controllers/store/store.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'database-1.chm0d84cwz4t.us-east-1.rds.amazonaws.com',
+      host: 'localhost',
       port: 3306,
-      username: 'admin',
-      password: 'admin123',
+      username: 'root',
+      password: '123456',
       database: 'salon_system',
       autoLoadEntities: true,
       entities: [UserEntity],
