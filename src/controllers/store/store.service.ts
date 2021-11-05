@@ -2,6 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { StoreEntity } from './store.entity';
+import * as multerS3 from 'multer-s3';
+import { S3 } from 'aws-sdk';
+import fs from 'fs';
 
 @Injectable()
 export class StoreService {
@@ -70,4 +73,45 @@ export class StoreService {
 			}
 		];
 	}
+
+	async uploadS3Bucket(file){
+		try {
+			const { originalname } = file;
+			const bucketS3 = 'salondetailsbucket';
+			
+			return await this.uploadS3(file.buffer, bucketS3, originalname);
+		  } catch (error) {
+			
+		  }
+	}
+
+	async uploadS3(file, bucket, name) {
+		const s3 = new S3({
+			accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+			secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+		});
+		const params = {
+			Bucket: bucket,
+			Key: String(name),
+			Body: file,
+		};
+		return new Promise((resolve, reject) => {
+			s3.upload(params, (err, data) => {
+			if (err) {
+				// Logger.error(err);
+				reject(err.message);
+			}
+			console.log(data)
+			resolve(data);
+			});
+		});
+	}
+
+	getS3() {
+		return new S3({
+			accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+			secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+		});
+	}
+	
 }
